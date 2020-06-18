@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "outDir": "bin-debug",
+    "experimentalDecorators": true,
+    "lib": [
+      "es5",
+      "dom",
+      "es2015.promise",
+      "dom.iterable"
+    ],
+    "types":[],
+
+    "skipLibCheck": true,//跳过所有声明文件的类型检查（*.d.ts）。
+    "allowSyntheticDefaultImports": true //允许从没有默认导出的模块进行默认导入。这不会影响代码运行，只是为了类型检测。
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

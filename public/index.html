@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="<%= BASE_URL %>css/spinner.css" type="text/css">
+    <title><%= webpackConfig.name %></title>
+  </head>
+  <style>
+
+    body {
+      background-color: #ffffff;
+      /*background-color: #f3f6f9;*/
+    }
+    .appLoading {
+      text-align: center;
+      vertical-align: middle;
+      width: 100%;
+      padding-top: 200px;
+      color: #aaacbd;
+    }
+
+  </style>
+  <body>
+  <div class="appLoading" id="appLoading">
+    <span class="spinner-loader">Loading&#8230;</span>
+    <p>
+      <span>加载资源中，请稍后&#8230;</span>
+  </div>
+  <noscript>
+      <strong>We're sorry but skev_pc_view doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
