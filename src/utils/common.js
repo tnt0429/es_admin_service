@@ -157,9 +157,6 @@ function checkPhone(value) {
 
 function lodopPrint(LODOP) {
     LODOP.PREVIEW();
-    //LODOP.PRINT();
-    // LODOP.PRINT_SETUP();
-    //LODOP.PRINT_DESIGN();
 }
 
 export default {

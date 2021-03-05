@@ -1,4 +1,3 @@
-<!-- 患者病例列表 -->
 <template>
     <div>
         <el-row>
