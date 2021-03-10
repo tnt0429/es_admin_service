@@ -89,63 +89,63 @@ function initDefaultDate(n, timeUnit, _date) {
     return _date;
 }
 
-function getIntervalSeconds(TimeOne, TimeTwo) {
+export function getIntervalSeconds(TimeOne, TimeTwo) {
     TimeOne = Date.parse(new Date(TimeOne.replace(/-/g, "/"))); //begintime 为开始时间
     TimeTwo = Date.parse(new Date(TimeTwo.replace(/-/g, "/")));   // endtime 为结束时间
     return Math.floor((TimeOne - TimeTwo) / (1000));
 }
 
-function getStrMinuteYMD(n, date) {
+export function getStrMinuteYMD(n, date) {
     date = initDefaultDate(n, 'm', date)
     return date.DateFormat('yyyy-MM-dd');
 }
 
-function getStrMinuteYMDHMS(n, date) {
+export function getStrMinuteYMDHMS(n, date) {
     date = initDefaultDate(n, 'm', date)
     return date.DateFormat('yyyy-MM-dd hh:mm:ss');
 }
 
-function getStrMinuteHMS(n, date) {
+export function getStrMinuteHMS(n, date) {
     date = initDefaultDate(n, 'm', date)
     return date.DateFormat('hh:mm:ss');
 }
 
-function getStrMinuteHM(n, date) {
+export function getStrMinuteHM(n, date) {
     date = initDefaultDate(n, 'm', date)
     return date.DateFormat('hh:mm');
 }
 
-function getStrDateYMD(n, date) {
+export function getStrDateYMD(n, date) {
     date = initDefaultDate(n, 'd', date)
     return date.DateFormat('yyyy-MM-dd');
 }
 
-function getStrDateYMDHMS(n, date) {
+export function getStrDateYMDHMS(n, date) {
     date = initDefaultDate(n, 'd', date)
     return date.DateFormat('yyyy-MM-dd hh:mm:ss');
 }
 
-function getStrDateHMS(n, date) {
+export function getStrDateHMS(n, date) {
     date = initDefaultDate(n, 'd', date)
     return date.DateFormat('hh:mm:ss');
 }
 
-function getStrDateHM(n, date) {
+export function getStrDateHM(n, date) {
     date = initDefaultDate(n, 'd', date)
     return date.DateFormat('hh:mm');
 }
 
-function getStrMonthYMD(n, date) {
+export function getStrMonthYMD(n, date) {
     date = initDefaultDate(n, 'M', date)
     return date.DateFormat('yyyy-MM-dd');
 }
 
-function getStrMonthYM(n, date) {
+export function getStrMonthYM(n, date) {
     date = initDefaultDate(n, 'M', date)
     return date.DateFormat('yyyy-MM');
 }
 
-function getStrMonthYMDHMS(n, date) {
+export function getStrMonthYMDHMS(n, date) {
     date = initDefaultDate(n, 'M', date)
     return date.DateFormat('yyyy-MM-dd hh:mm:ss');
 }
@@ -156,7 +156,7 @@ function getStrMonthYMDHMS(n, date) {
  * @param date String
  * @returns age = {num: 0,type: 1} num 数字，type类型（岁，月，天）
  */
-function BirthToNL(date) {
+export function BirthToNL(date) {
     let age = {
         num: 0,
         type: 1
@@ -191,7 +191,7 @@ function BirthToNL(date) {
  * @param age = {num: 0, type: 1} num 数字，type类型（岁，月，天）
  * @returns {String} date
  */
-function ageToDate(age) {
+export function ageToDate(age) {
     let startYear = new Date().getFullYear();
     let startMonth = new Date().getMonth();
     let startDay = new Date().getDate();
@@ -281,7 +281,7 @@ function ageToDate(age) {
 /**
  * 年龄转换成生日
  */
-function changeAge2Birth(ageYear, ageMonth, ageDay) {
+export function changeAge2Birth(ageYear, ageMonth, ageDay) {
 
     let newDate = new Date();
     newDate.setDate(newDate.getDate() - ageDay);
@@ -314,7 +314,7 @@ function changeAge2Birth(ageYear, ageMonth, ageDay) {
 /**
  * 生日转换成年龄
  */
-function changeBirth2Age(birth) {
+export function changeBirth2Age(birth) {
     let age = ['', '', ''];
     if (birth) {
         birth = birth.replace(/-/g, "/");

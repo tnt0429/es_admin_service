@@ -5,7 +5,7 @@
  * @param code
  * @returns {string}
  */
-function checkIdCardSimple(code) {
+export function checkIdCardSimple(code) {
     let tip = "";
     if (!code
         || (code.length != 15 && code.length != 18)) {
@@ -48,7 +48,7 @@ Wi 7 9 10 5 8 4 2 1 6 3 7 9 10 5 8 4 2 1
  * @param code
  * @constructor
  */
-function checkIdCard(code) {
+export function checkIdCard(code) {
     let tip = "";
     let city = {
         11: "北京",
@@ -194,7 +194,7 @@ function isValidityBrithBy15IdCard(idCard15) {
  * @param idCard 身份证号
  * @return 格式为"yyyy-MM-dd"
  */
-function getBirthByIdCard(idCard) {
+export function getBirthByIdCard(idCard) {
     let birthday = "";
     if (idCard != null && idCard != "") {
         if (idCard.length == 15) {
