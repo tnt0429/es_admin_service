@@ -77,82 +77,82 @@
 </template>
 
 <script>
-    import templateReturnList from "../../api/templateReturn.ts";
+import templateReturnList from "../../api/templateReturn.ts";
 
-    export default {
-        name: "TemplateReturn",
-        components: {
-            DeptSelect: () => import("../sys/DeptSelect" )
-        },
-        data() {
-            return {
-                formQuery: {
-                    deptid: 1
-                },
-                tableDataReturn: [],
-                tableDataDoctor: [],
-                dialogFormVisible: false,
-                fullscreenLoading: false,
-            }
-        },
-        methods: {
-            open(id) {
-                this.dialogFormVisible = true;
-                this.fullscreenLoading = true;
-                if (id) {
-                    this.dataFrom = {
-                        labelName: "",
-                        labelContent: "",
-                        state: 1,
-                        id: 1
-                    };
-                } else {
-                    this.dataFrom = {id: null};
-                }
-                this.initData();
-                this.fullscreenLoading = false;
+export default {
+    name: "TemplateReturn",
+    components: {
+        DeptSelect: () => import("../sys/DeptSelect" )
+    },
+    data() {
+        return {
+            formQuery: {
+                deptid: 1
             },
-            initData() {
-                this.tableDataReturn = [];
-                this.tableDataDoctor = [];
-                if (templateReturnList) {
-                    for (let i = 0; i < templateReturnList.length; i++) {
-                        if (templateReturnList[i].type < 5) {
-                            this.tableDataReturn.push(templateReturnList[i]);
-                        } else {
-                            this.tableDataDoctor.push(templateReturnList[i]);
-                        }
+            tableDataReturn: [],
+            tableDataDoctor: [],
+            dialogFormVisible: false,
+            fullscreenLoading: false,
+        }
+    },
+    methods: {
+        open(id) {
+            this.dialogFormVisible = true;
+            this.fullscreenLoading = true;
+            if (id) {
+                this.dataFrom = {
+                    labelName: "",
+                    labelContent: "",
+                    state: 1,
+                    id: 1
+                };
+            } else {
+                this.dataFrom = {id: null};
+            }
+            this.initData();
+            this.fullscreenLoading = false;
+        },
+        initData() {
+            this.tableDataReturn = [];
+            this.tableDataDoctor = [];
+            if (templateReturnList) {
+                for (let i = 0; i < templateReturnList.length; i++) {
+                    if (templateReturnList[i].type < 5) {
+                        this.tableDataReturn.push(templateReturnList[i]);
+                    } else {
+                        this.tableDataDoctor.push(templateReturnList[i]);
                     }
                 }
-            },
-            handleEdit(row) {
-
-            },
-            tableRowClassName({row, rowIndex}) {
-                if (row.state === 2) {
-                    return 'warning-row';
-                }
-                return '';
-            }, selectDept() {
-                this.$refs.deptSelect.open();
-            },
-            winClose() {
-                this.dialogFormVisible = false;
-                this.dataFrom = {};
-                this.$refs['dataForm'].resetFields();
             }
+        },
+        handleEdit(row) {
+
+        },
+        tableRowClassName({row, rowIndex}) {
+            if (row.state === 2) {
+                return 'warning-row';
+            }
+            return '';
+        }, selectDept() {
+            this.$refs.deptSelect.open();
+        },
+        winClose() {
+            this.dialogFormVisible = false;
+            this.dataFrom = {};
+            this.$refs['dataForm'].resetFields();
         }
     }
+}
 </script>
 
 <style scoped>
-    .row {
-        margin-top: 1rem;
-    }
+.row {
+    margin-top: 1rem;
+}
 
 </style>
 <style>
-    .el-table .warning-row {
-        background: oldlace;
-    }
+.el-table .warning-row {
+    background: oldlace;
+}
 </style>

@@ -25,60 +25,60 @@
 </template>
 
 <script>
-    import templateReturnList from "../../api/templateReturn.ts"
+import templateReturnList from "../../api/templateReturn.ts"
 
-    export default {
-        name: "AccessEdit",
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                templateReturnList: templateReturnList
-            };
-        },
-        methods: {
-            iniData() {
-                // 初始化格式展现
-                if (this.templateReturnList && this.templateReturnList.length > 0) {
-                    for (let i = 0; i < this.templateReturnList.length; i++) {
-                        this.templateReturnList[i].candidateArr = this.templateReturnList[i].candidateValue.split("|");
-                        if (this.templateReturnList[i].candidateValue === '#patientName'){
-                            this.templateReturnList[i].valueData = "张三";
-                        }else if (this.templateReturnList[i].candidateValue === '#patientSex'){
-                            this.templateReturnList[i].valueData = "男";
-                        }else if (this.templateReturnList[i].candidateValue === '#patientCardNo'){
-                            this.templateReturnList[i].valueData = "13903110311";
-                        }else if (this.templateReturnList[i].candidateValue === '#hospitalName'){
-                            this.templateReturnList[i].valueData = "河北医大第二医院";
-                        }else if (this.templateReturnList[i].candidateValue === '#DoctorName'){
-                            this.templateReturnList[i].valueData = "李思";
-                        }
+export default {
+    name: "AccessEdit",
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            templateReturnList: templateReturnList
+        };
+    },
+    methods: {
+        iniData() {
+            // 初始化格式展现
+            if (this.templateReturnList && this.templateReturnList.length > 0) {
+                for (let i = 0; i < this.templateReturnList.length; i++) {
+                    this.templateReturnList[i].candidateArr = this.templateReturnList[i].candidateValue.split("|");
+                    if (this.templateReturnList[i].candidateValue === '#patientName') {
+                        this.templateReturnList[i].valueData = "张三";
+                    } else if (this.templateReturnList[i].candidateValue === '#patientSex') {
+                        this.templateReturnList[i].valueData = "男";
+                    } else if (this.templateReturnList[i].candidateValue === '#patientCardNo') {
+                        this.templateReturnList[i].valueData = "13903110311";
+                    } else if (this.templateReturnList[i].candidateValue === '#hospitalName') {
+                        this.templateReturnList[i].valueData = "河北医大第二医院";
+                    } else if (this.templateReturnList[i].candidateValue === '#DoctorName') {
+                        this.templateReturnList[i].valueData = "李思";
                     }
                 }
-            },
-            open(rowData) {
-                this.dialogFormVisible = true;
-                this.dataFrom = rowData;
-                this.iniData();
-            },
-            saveData() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            winClose() {
-                this.dialogFormVisible = false;
             }
+        },
+        open(rowData) {
+            this.dialogFormVisible = true;
+            this.dataFrom = rowData;
+            this.iniData();
+        },
+        saveData() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
         }
     }
+}
 </script>
 
 <style scoped>

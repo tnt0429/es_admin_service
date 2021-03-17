@@ -64,72 +64,72 @@
 </template>
 
 <script>
-    import TablePage from "../../mixins/TablePage.ts";
-    import tableDataList from "../../api/templateReturnList.ts";
-    import diseaseLabelList from "../../api/diseaseLabelList.ts";
+import TablePage from "../../mixins/TablePage.ts";
+import tableDataList from "../../api/templateReturnList.ts";
+import diseaseLabelList from "../../api/diseaseLabelList.ts";
 
-    export default {
-        name: "TemplateReturnList",
-        components: {
-            DataEdit: () => import('./TemplateReturn'),
-            DeptSelect: () => import("../sys/DeptSelect" ),
-        },
-        mixins: [TablePage],
-        props: {
-            loadType: {
-                type: Number,
-                default: 4  //取值:1=分配主治医生;2=患者状况管理;3=回访计划管理;4=患者基础信息
+export default {
+    name: "TemplateReturnList",
+    components: {
+        DataEdit: () => import('./TemplateReturn'),
+        DeptSelect: () => import("../sys/DeptSelect" ),
+    },
+    mixins: [TablePage],
+    props: {
+        loadType: {
+            type: Number,
+            default: 4  //取值:1=分配主治医生;2=患者状况管理;3=回访计划管理;4=患者基础信息
+        }
+    },
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            formQuery: {
+                templateName: "",
+                diseaseLabel: "",
+                deptId: "",
+                pageStart: 1,
+                pageSize: 10
+            },
+            tableData: tableDataList,
+            diseaseLabelList: [],
+            total: 0
+        };
+    },
+    mounted() {
+        this.loadDiseaseLabelList();
+        this.onQuery(1);
+    },
+    methods: {
+        onQuery(first) {
+            this.fullscreenLoading = true;
+            if (first) {
+                this.formQuery.pageStart = 1;
             }
+            this.total = this.tableData.length;
+            this.fullscreenLoading = false;
         },
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                formQuery: {
-                    templateName: "",
-                    diseaseLabel: "",
-                    deptId: "",
-                    pageStart: 1,
-                    pageSize: 10
-                },
-                tableData: tableDataList,
-                diseaseLabelList: [],
-                total: 0
-            };
+        loadDiseaseLabelList() {
+            this.diseaseLabelList = diseaseLabelList;
+            this.diseaseLabelList.unshift({labelName: "全部"});
         },
-        mounted() {
-            this.loadDiseaseLabelList();
-            this.onQuery(1);
+        onNewData() {
+            this.$refs.dataEdit.open();
         },
-        methods: {
-            onQuery(first) {
-                this.fullscreenLoading = true;
-                if (first) {
-                    this.formQuery.pageStart = 1;
-                }
-                this.total = this.tableData.length;
-                this.fullscreenLoading = false;
-            },
-            loadDiseaseLabelList() {
-                this.diseaseLabelList = diseaseLabelList;
-                this.diseaseLabelList.unshift({labelName: "全部"});
-            },
-            onNewData() {
-                this.$refs.dataEdit.open();
-            },
-            handleEdit(row) {
-                this.$refs.dataEdit.open(row.id);
-            },
-            selectDept() {
-                this.$refs.deptSelect.open();
-            }
+        handleEdit(row) {
+            this.$refs.dataEdit.open(row.id);
+        },
+        selectDept() {
+            this.$refs.deptSelect.open();
         }
     }
+}
 </script>
 
 <style scoped>
-    .row {
-        margin-top: 1rem;
-    }
+.row {
+    margin-top: 1rem;
+}
 
 </style>

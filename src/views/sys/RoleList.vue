@@ -74,66 +74,66 @@
 
 <script>
 
-    import TablePage from "../../mixins/TablePage.ts";
-    import roleList from "../../api/roleList.ts";
+import TablePage from "../../mixins/TablePage.ts";
+import roleList from "../../api/roleList.ts";
 
-    export default {
-        name: "RoleList",
-        components: {
-            DataEdit: () => import('./RoleEdit')
-        },
-        mixins: [TablePage],
-        data() {
-            return {
-                fullscreenLoading: false,
-                formQuery: {
-                    listType: 2,
-                    name: "",
-                    type: "",
-                    pageStart: 1,
-                    pageSize: 10
-                },
-                dataId: 0,
-                tableData: [],
-                total: 0
-            };
-        },
-        mounted() {
-            this.onQuery();
-        },
-        methods: {
-            onQuery(first) {
-                this.fullscreenLoading = true;
-                if (first) {
-                    this.formQuery.pageStart = 1;
-                }
-                this.tableData = roleList;
-                this.total = this.tableData.length;
-                this.fullscreenLoading = false;
+export default {
+    name: "RoleList",
+    components: {
+        DataEdit: () => import('./RoleEdit')
+    },
+    mixins: [TablePage],
+    data() {
+        return {
+            fullscreenLoading: false,
+            formQuery: {
+                listType: 2,
+                name: "",
+                type: "",
+                pageStart: 1,
+                pageSize: 10
             },
-            onNewData() {
-                this.$refs.dataEdit.open(null);
-            },
-            handleEdit(row) {
-                this.dataId = row.id;
-                this.$refs.dateEdit.open(row.id);
-            },
-            // eslint-disable-next-line no-unused-vars
-            handleDelete(row) {
-                this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    type: "warning"
-                }).then(() => {
-                    this.$message({
-                        type: "success",
-                        message: "删除数据成功!",
-                        center: true
-                    });
-                });
+            dataId: 0,
+            tableData: [],
+            total: 0
+        };
+    },
+    mounted() {
+        this.onQuery();
+    },
+    methods: {
+        onQuery(first) {
+            this.fullscreenLoading = true;
+            if (first) {
+                this.formQuery.pageStart = 1;
             }
+            this.tableData = roleList;
+            this.total = this.tableData.length;
+            this.fullscreenLoading = false;
+        },
+        onNewData() {
+            this.$refs.dataEdit.open(null);
+        },
+        handleEdit(row) {
+            this.dataId = row.id;
+            this.$refs.dateEdit.open(row.id);
+        },
+        // eslint-disable-next-line no-unused-vars
+        handleDelete(row) {
+            this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            }).then(() => {
+                this.$message({
+                    type: "success",
+                    message: "删除数据成功!",
+                    center: true
+                });
+            });
         }
     }
+}
 </script>
 
 <style scoped>

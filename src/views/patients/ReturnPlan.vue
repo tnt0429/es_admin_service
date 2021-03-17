@@ -42,56 +42,56 @@
 </template>
 
 <script>
-    export default {
-        name: "ReturnPlan",
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                dataFrom: {
-                    returnInterval: 3,
-                    dischargeReturnDay: 3,
-                    seeReturnDay:3,
-                },
-                rules: {
-                    patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
-                    patientsSex: [{required: true, message: "请输入性别", trigger: 'blur'}],
-                    patientsBirthday: [{required: true, message: "请录入出生日期", trigger: 'blur'}]
-                },
-            };
+export default {
+    name: "ReturnPlan",
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            dataFrom: {
+                returnInterval: 3,
+                dischargeReturnDay: 3,
+                seeReturnDay: 3,
+            },
+            rules: {
+                patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
+                patientsSex: [{required: true, message: "请输入性别", trigger: 'blur'}],
+                patientsBirthday: [{required: true, message: "请录入出生日期", trigger: 'blur'}]
+            },
+        };
+    },
+    methods: {
+        open(rowData) {
+            this.dialogFormVisible = true;
+            console.log("rowData:", rowData);
         },
-        methods: {
-            open(rowData) {
-                this.dialogFormVisible = true;
-                console.log("rowData:", rowData);
-            },
-            saveData() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            winClose() {
-                this.dialogFormVisible = false;
-            }
+        saveData() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
         }
     }
+}
 </script>
 
 <style scoped>
-    .elTagClass {
-        margin-right: 1rem;
-        margin-bottom: 0.5rem;
-    }
+.elTagClass {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+}
 
-    .elRowClass {
-        margin-bottom: 0.5rem;
-    }
+.elRowClass {
+    margin-bottom: 0.5rem;
+}
 </style>

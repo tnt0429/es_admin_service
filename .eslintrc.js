@@ -29,7 +29,7 @@ module.exports = {
         'indent': 'off',
         'vue/script-indent': [1, 4,
             {
-                'baseIndent': 1
+                'baseIndent': 0
             }
         ],
         'vue/html-indent': [1, 4,

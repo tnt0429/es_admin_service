@@ -31,7 +31,7 @@
                 </el-col>
                 <el-col :span="6">
                     <el-form-item label="证件类别" prop="patientsCardType">
-                        <el-select v-model="dataFrom.patientsCardType" placeholder="请选择"  class="w100">
+                        <el-select v-model="dataFrom.patientsCardType" placeholder="请选择" class="w100">
                             <el-option label="身份证" value="身份证"></el-option>
                             <el-option label="军官证" value="军官证"></el-option>
                             <el-option label="护照" value="护照"></el-option>
@@ -208,53 +208,53 @@
 </template>
 
 <script>
-    export default {
-        name: "PatientsEdit",
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                rules: {
-                    patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
-                    patientsSex: [{required: true, message: "请输入性别", trigger: 'blur'}],
-                    patientsBirthday: [{required: true, message: "请录入出生日期", trigger: 'blur'}],
-                    patientsCardType: [{required: true, message: "必须录入", trigger: 'blur'}],
-                    patientsCard: [{required: true, message: "必须录入", trigger: 'blur'}],
-                    patientsPhone: [{required: true, message: "必须录入", trigger: 'blur'}],
-                    otherPhone: [{required: true, message: "必须录入", trigger: 'blur'}],
-                    patientsAddr: [{required: true, message: "必须录入", trigger: 'blur'}],
-                },
-                dataFrom: {},
-            };
+export default {
+    name: "PatientsEdit",
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            rules: {
+                patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
+                patientsSex: [{required: true, message: "请输入性别", trigger: 'blur'}],
+                patientsBirthday: [{required: true, message: "请录入出生日期", trigger: 'blur'}],
+                patientsCardType: [{required: true, message: "必须录入", trigger: 'blur'}],
+                patientsCard: [{required: true, message: "必须录入", trigger: 'blur'}],
+                patientsPhone: [{required: true, message: "必须录入", trigger: 'blur'}],
+                otherPhone: [{required: true, message: "必须录入", trigger: 'blur'}],
+                patientsAddr: [{required: true, message: "必须录入", trigger: 'blur'}],
+            },
+            dataFrom: {},
+        };
+    },
+    methods: {
+        open(rowData) {
+            this.dialogFormVisible = true;
+            this.dataFrom = rowData;
         },
-        methods: {
-            open(rowData) {
-                this.dialogFormVisible = true;
-                this.dataFrom = rowData;
-            },
-            saveData() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            winClose() {
-                this.dialogFormVisible = false;
-            }
+        saveData() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
         }
     }
+}
 </script>
 
 <style scoped lang="scss">
-    .w100 {
-        width: 100%;
-    }
+.w100 {
+    width: 100%;
+}
 
 </style>

@@ -70,61 +70,61 @@
 </template>
 
 <script>
-    import TablePage from "../../mixins/TablePage.ts";
-    import hospitalMessList from "../../api/hospitalMessList.ts";
+import TablePage from "../../mixins/TablePage.ts";
+import hospitalMessList from "../../api/hospitalMessList.ts";
 
-    export default {
-        name: "PatientMedicalRecord",
-        components: {
-            DataEdit: () => import('./MedicalRecordView'),
-            DeptSelect: () => import("../sys/DeptSelect" ),
-        },
-        mixins: [TablePage],
-        props: {
-            loadType: {
-                type: Number,
-                default: 4  //取值:1=分配主治医生;2=患者状况管理;3=回访计划管理;4=患者基础信息
-            }
-        },
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                formQuery: {
-                    patientsName: "",
-                    patientsCard: "",
-                    doctor: "",
-                    deptId: "",
-                    admissionDate: null,
-                    dischargeDate: null,
-                    clinicDate: null,
-                    pageStart: 1,
-                    pageSize: 10
-                },
-                tableData: hospitalMessList,
-                total: 0
-            };
-        },
-        mounted() {
-            this.onQuery(1);
-        },
-        methods: {
-            onQuery(first) {
-                this.fullscreenLoading = true;
-                if (first) {
-                    this.formQuery.pageStart = 1;
-                }
-                this.total = this.tableData.length;
-                this.fullscreenLoading = false;
+export default {
+    name: "PatientMedicalRecord",
+    components: {
+        DataEdit: () => import('./MedicalRecordView'),
+        DeptSelect: () => import("../sys/DeptSelect" ),
+    },
+    mixins: [TablePage],
+    props: {
+        loadType: {
+            type: Number,
+            default: 4  //取值:1=分配主治医生;2=患者状况管理;3=回访计划管理;4=患者基础信息
+        }
+    },
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            formQuery: {
+                patientsName: "",
+                patientsCard: "",
+                doctor: "",
+                deptId: "",
+                admissionDate: null,
+                dischargeDate: null,
+                clinicDate: null,
+                pageStart: 1,
+                pageSize: 10
             },
-            handleEdit(row) {
-                this.$refs.dataEdit.open(row);
-            },
-            selectDept() {
-                this.$refs.deptSelect.open();
+            tableData: hospitalMessList,
+            total: 0
+        };
+    },
+    mounted() {
+        this.onQuery(1);
+    },
+    methods: {
+        onQuery(first) {
+            this.fullscreenLoading = true;
+            if (first) {
+                this.formQuery.pageStart = 1;
             }
+            this.total = this.tableData.length;
+            this.fullscreenLoading = false;
+        },
+        handleEdit(row) {
+            this.$refs.dataEdit.open(row);
+        },
+        selectDept() {
+            this.$refs.deptSelect.open();
         }
     }
+}
 </script>
 
 <style scoped>

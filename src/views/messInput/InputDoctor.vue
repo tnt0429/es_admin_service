@@ -9,9 +9,9 @@
 </template>
 
 <script>
-    export default {
-        name: "InputDoctor"
-    }
+export default {
+    name: "InputDoctor"
+}
 </script>
 
 <style scoped>

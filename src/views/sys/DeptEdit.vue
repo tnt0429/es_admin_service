@@ -59,66 +59,66 @@
 </template>
 
 <script>
-    export default {
-        name: "DeptEdit",
-        props: {
-            dataId: Number
-        },
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                rules: {
-                    deptName: [{required: true, message: "请输入科室名称", trigger: 'blur'}]
-                },
-                dataFrom: {},
-            };
-        },
-        mounted() {
-        },
-        methods: {
-            open(id) {
-                this.dialogFormVisible = true;
-                if (id) {
-                    this.fullscreenLoading = true;
-                    this.dataFrom = {
-                        loginName: "admin",
-                        userName: "系统管理员",
-                        roleId: 1,
-                        deptId: 1,
-                        state: 1,
-                        id: 1
-                    };
-                    this.fullscreenLoading = false;
-                } else {
-                    this.dataFrom = {id: null};
-                }
+export default {
+    name: "DeptEdit",
+    props: {
+        dataId: Number
+    },
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            rules: {
+                deptName: [{required: true, message: "请输入科室名称", trigger: 'blur'}]
             },
-            saveUser() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            winClose() {
-                this.dialogFormVisible = false;
-                this.dataFrom = {};
-                this.$refs['dataForm'].resetFields();
+            dataFrom: {},
+        };
+    },
+    mounted() {
+    },
+    methods: {
+        open(id) {
+            this.dialogFormVisible = true;
+            if (id) {
+                this.fullscreenLoading = true;
+                this.dataFrom = {
+                    loginName: "admin",
+                    userName: "系统管理员",
+                    roleId: 1,
+                    deptId: 1,
+                    state: 1,
+                    id: 1
+                };
+                this.fullscreenLoading = false;
+            } else {
+                this.dataFrom = {id: null};
             }
+        },
+        saveUser() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
+            this.dataFrom = {};
+            this.$refs['dataForm'].resetFields();
         }
     }
+}
 </script>
 
 <style scoped lang="scss">
-    .w100 {
-        width: 100%;
-    }
+.w100 {
+    width: 100%;
+}
 
 </style>

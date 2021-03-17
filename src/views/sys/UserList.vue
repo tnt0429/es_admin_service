@@ -8,7 +8,7 @@
                 </el-form-item>
                 <el-form-item label="机构">
                     <el-input v-model="formQuery.deptId" placeholder="请选择机构" readonly>
-                        <el-button slot="append" icon="el-icon-search" @click="selectDept" />
+                        <el-button slot="append" icon="el-icon-search" @click="selectDept"/>
                     </el-input>
                 </el-form-item>
                 <el-form-item label="角色">
@@ -71,101 +71,101 @@
         </el-row>
 
         <DataEdit ref="dataEdit" :data-id="dataId" @listenSelect="onQuery"/>
-        <DeptSelect ref="deptSelect" />
+        <DeptSelect ref="deptSelect"/>
     </div>
 </template>
 
 <script>
-    import TablePage from "../../mixins/TablePage.ts";
-    import roleList from "../../api/roleList.ts";
+import TablePage from "../../mixins/TablePage.ts";
+import roleList from "../../api/roleList.ts";
 
-    export default {
-        name: "UserList",
-        components: {
-            DataEdit: () => import('./UserEdit'),
-            DeptSelect: () => import("./DeptSelect" )
-        },
-        mixins: [TablePage],
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                formQuery: {
-                    name: "",
-                    state: "",
-                    deptId: "",
-                    roleId: "",
-                    pageStart: 1,
-                    pageSize: 10
-                },
-                roleList: [],
-                dataId: 0,
-                tableData: [],
-                total: 0
-            };
-        },
-        mounted() {
-            this.listRole();
-            this.onQuery(1);
-        },
-        methods: {
-            onQuery(first) {
-                this.fullscreenLoading = true;
-                if (first) {
-                    this.formQuery.pageStart = 1;
-                }
-                this.tableData = [
-                    {data: {userName: "系统管理员", loginName: "admin", state: 1}}
-                ];
-                this.total = this.tableData.length;
-                this.fullscreenLoading = false;
+export default {
+    name: "UserList",
+    components: {
+        DataEdit: () => import('./UserEdit'),
+        DeptSelect: () => import("./DeptSelect" )
+    },
+    mixins: [TablePage],
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            formQuery: {
+                name: "",
+                state: "",
+                deptId: "",
+                roleId: "",
+                pageStart: 1,
+                pageSize: 10
             },
-            listRole() {
-                this.roleList =roleList;
-            },
-            onNewData() {
-                this.$refs.dataEdit.open(null);
-            },
-            handleEdit(row) {
-                this.dataId = row.data.id;
-                this.$refs.dataEdit.open(row.data.id);
-            },
-            handleDelete(row) {
-                console.log(row);
-                this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    type: "warning"
-                }).then(() => {
-                    this.$message({
-                        type: "success",
-                        message: "删除数据成功!",
-                        center: true
-                    });
-                }).catch(() => {
-                });
-            },
-            initPassword(row) {
-                console.log(row);
-                this.$confirm("确定要将密码重置为123456吗?", "提示", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    type: "warning"
-                }).then(() => {
-                    this.$message({
-                        type: "success",
-                        message: "重置密码成功!",
-                        center: true
-                    });
-                }).catch(() => {
-                });
-
-            },
-            selectDept(){
-                this.$refs.deptSelect.open();
+            roleList: [],
+            dataId: 0,
+            tableData: [],
+            total: 0
+        };
+    },
+    mounted() {
+        this.listRole();
+        this.onQuery(1);
+    },
+    methods: {
+        onQuery(first) {
+            this.fullscreenLoading = true;
+            if (first) {
+                this.formQuery.pageStart = 1;
             }
+            this.tableData = [
+                {data: {userName: "系统管理员", loginName: "admin", state: 1}}
+            ];
+            this.total = this.tableData.length;
+            this.fullscreenLoading = false;
+        },
+        listRole() {
+            this.roleList = roleList;
+        },
+        onNewData() {
+            this.$refs.dataEdit.open(null);
+        },
+        handleEdit(row) {
+            this.dataId = row.data.id;
+            this.$refs.dataEdit.open(row.data.id);
+        },
+        handleDelete(row) {
+            console.log(row);
+            this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            }).then(() => {
+                this.$message({
+                    type: "success",
+                    message: "删除数据成功!",
+                    center: true
+                });
+            }).catch(() => {
+            });
+        },
+        initPassword(row) {
+            console.log(row);
+            this.$confirm("确定要将密码重置为123456吗?", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            }).then(() => {
+                this.$message({
+                    type: "success",
+                    message: "重置密码成功!",
+                    center: true
+                });
+            }).catch(() => {
+            });
+
+        },
+        selectDept() {
+            this.$refs.deptSelect.open();
         }
     }
+}
 </script>
 
 <style scoped>

@@ -24,13 +24,13 @@
                 <el-col :span="12">
                     <el-card class="box-card" style="height: 60vh;overflow: auto;">
                         <el-tree
-                                ref="tree"
-                                :data="dateTree"
-                                :props="props"
-                                :default-checked-keys="checkTree"
-                                node-key="id"
-                                default-expand-all
-                                show-checkbox>
+                            ref="tree"
+                            :data="dateTree"
+                            :props="props"
+                            :default-checked-keys="checkTree"
+                            node-key="id"
+                            default-expand-all
+                            show-checkbox>
                         </el-tree>
                     </el-card>
                 </el-col>
@@ -44,98 +44,101 @@
 </template>
 
 <script>
-    import menus from "../../api/menu.ts";
+import menus from "../../api/menu.ts";
 
-    export default {
-        name: 'RoleEdit',
-        props: {
-            dataId: Number
-        },
-        data() {
-            return {
-                fullscreenLoading: false,
-                dateTree: [],
-                checkTree: [],
-                dataFrom: {},
-                stateList: [{id: 1, name: '在用'}, {id: 2, name: '停用'}],
-                props: {
-                    label: 'menuName',
-                    children: 'children'
-                },
-                rules: {
-                    roleName: [{required: true, message: '请输入角色名', trigger: 'blur'}],
-                    state: [{required: true, message: '请选择状态', trigger: 'blur'}]
-                },
-                dialogFormVisible: false,
-                count: 1
-            }
-        },
-        methods: {
-            open(id) {
-                this.listMenu();
-                this.dataFrom.id = id;
-                if (id) {
-                    this.findRoleById(id)
-                }
-                this.dialogFormVisible = true
+export default {
+    name: 'RoleEdit',
+    props: {
+        dataId: {
+            type: Number,
+            default: 0
+        }
+    },
+    data() {
+        return {
+            fullscreenLoading: false,
+            dateTree: [],
+            checkTree: [],
+            dataFrom: {},
+            stateList: [{id: 1, name: '在用'}, {id: 2, name: '停用'}],
+            props: {
+                label: 'menuName',
+                children: 'children'
             },
-            saveRole() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        let menuList = this.$refs.tree.getCheckedNodes(false, true);
-                        let id = 0;
-                        let menuIdList = [];
-                        if (menuList.length < 1) {
-                            this.$message({
-                                type: 'error',
-                                message: '请选择菜单!'
-                            });
-                            return false;
-                        }
-                        for (let i = 0; i < menuList.length; i++) {
-                            id = menuList[i].id;
-                            menuIdList.push(id);
-                        }
+            rules: {
+                roleName: [{required: true, message: '请输入角色名', trigger: 'blur'}],
+                state: [{required: true, message: '请选择状态', trigger: 'blur'}]
+            },
+            dialogFormVisible: false,
+            count: 1
+        }
+    },
+    methods: {
+        open(id) {
+            this.listMenu();
+            this.dataFrom.id = id;
+            if (id) {
+                this.findRoleById(id)
+            }
+            this.dialogFormVisible = true
+        },
+        saveRole() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    let menuList = this.$refs.tree.getCheckedNodes(false, true);
+                    let id = 0;
+                    let menuIdList = [];
+                    if (menuList.length < 1) {
                         this.$message({
-                            type: 'success',
-                            message: '保存成功!'
+                            type: 'error',
+                            message: '请选择菜单!'
                         });
-                        this.fullscreenLoading = false;
+                        return false;
                     }
-                })
-            },
-            listMenu() {
-                this.fullscreenLoading = true;
-                this.dateTree = this.listToTree(menus, 0);
-                this.fullscreenLoading = false;
-            },
-            findRoleById(id) {
-            },
-            listToTree(data, department) {
-                //list转tree
-                let tree = [];
-                let temp;
-                for (let i = 0; i < data.length; i++) {
-                    if (data[i].parentId === department) {//是父节点
-                        let obj = data[i];
-                        temp = this.listToTree(data, data[i].id);//递归
-                        if (temp.length > 0) {//有子节点
-                            obj.children = temp;
-                        }
-                        tree.push(obj);
+                    for (let i = 0; i < menuList.length; i++) {
+                        id = menuList[i].id;
+                        menuIdList.push(id);
                     }
+                    this.$message({
+                        type: 'success',
+                        message: '保存成功!'
+                    });
+                    this.fullscreenLoading = false;
                 }
-                return tree
-            },
-            winClose() {
-                this.dialogFormVisible = false;
-                this.dataFrom = {};
-                this.$refs['dataForm'].resetFields();
-                this.$emit('listenSelect', 1)
+            })
+        },
+        listMenu() {
+            this.fullscreenLoading = true;
+            this.dateTree = this.listToTree(menus, 0);
+            this.fullscreenLoading = false;
+        },
+        findRoleById(id) {
+        },
+        listToTree(data, department) {
+            //list转tree
+            let tree = [];
+            let temp;
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].parentId === department) {//是父节点
+                    let obj = data[i];
+                    temp = this.listToTree(data, data[i].id);//递归
+                    if (temp.length > 0) {//有子节点
+                        obj.children = temp;
+                    }
+                    tree.push(obj);
+                }
             }
+            return tree
+        },
+        winClose() {
+            this.dialogFormVisible = false;
+            this.dataFrom = {};
+            this.$refs['dataForm'].resetFields();
+            this.$emit('listenSelect', 1)
         }
     }
+}
 </script>
 
 <style scoped>

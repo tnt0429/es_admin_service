@@ -283,90 +283,90 @@
 </template>
 
 <script>
-    import templateReturnList from "../../api/templateReturn.ts"
+import templateReturnList from "../../api/templateReturn.ts"
 
-    export default {
-        name: "AccessEdit",
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                templateReturnList: [],
-                baseMessList: [],
-                doctorReturnList: [],
-            };
-        },
-        methods: {
-            iniData() {
-                // 初始化格式展现
-                this.templateReturnList = [];
-                this.baseMessList = [];
-                this.doctorReturnList = [];
-                if (templateReturnList && templateReturnList.length > 0) {
-                    for (let i = 0; i < templateReturnList.length; i++) {
-                        templateReturnList[i].candidateArr = templateReturnList[i].candidateValue.split("|");
-                        if (templateReturnList[i].candidateValue === '#patientName') {
-                            templateReturnList[i].valueData = "张三";
-                        } else if (templateReturnList[i].candidateValue === '#patientSex') {
-                            templateReturnList[i].valueData = "男";
-                        } else if (templateReturnList[i].candidateValue === '#patientCardNo') {
-                            templateReturnList[i].valueData = "13903110311";
-                        } else if (templateReturnList[i].candidateValue === '#hospitalName') {
-                            templateReturnList[i].valueData = "河北医大第二医院";
-                        } else if (templateReturnList[i].candidateValue === '#DoctorName') {
-                            templateReturnList[i].valueData = "李思";
-                        }
+export default {
+    name: "AccessEdit",
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            templateReturnList: [],
+            baseMessList: [],
+            doctorReturnList: [],
+        };
+    },
+    methods: {
+        iniData() {
+            // 初始化格式展现
+            this.templateReturnList = [];
+            this.baseMessList = [];
+            this.doctorReturnList = [];
+            if (templateReturnList && templateReturnList.length > 0) {
+                for (let i = 0; i < templateReturnList.length; i++) {
+                    templateReturnList[i].candidateArr = templateReturnList[i].candidateValue.split("|");
+                    if (templateReturnList[i].candidateValue === '#patientName') {
+                        templateReturnList[i].valueData = "张三";
+                    } else if (templateReturnList[i].candidateValue === '#patientSex') {
+                        templateReturnList[i].valueData = "男";
+                    } else if (templateReturnList[i].candidateValue === '#patientCardNo') {
+                        templateReturnList[i].valueData = "13903110311";
+                    } else if (templateReturnList[i].candidateValue === '#hospitalName') {
+                        templateReturnList[i].valueData = "河北医大第二医院";
+                    } else if (templateReturnList[i].candidateValue === '#DoctorName') {
+                        templateReturnList[i].valueData = "李思";
                     }
                 }
-                if (templateReturnList) {
-                    for (let i = 0; i < templateReturnList.length; i++) {
-                        if (templateReturnList[i].state === 1 && templateReturnList[i].type < 5) {
-                            if (templateReturnList[i].type === 1) {
-                                this.baseMessList.push(templateReturnList[i]);
-                            } else {
-                                this.templateReturnList.push(templateReturnList[i]);
-                            }
-                        } else {
-                            this.doctorReturnList.push(templateReturnList[i]);
-                        }
-                    }
-                }
-            },
-            open(rowData) {
-                this.dialogFormVisible = true;
-                this.dataFrom = rowData;
-                this.iniData();
-            },
-            saveData() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            winClose() {
-                this.dialogFormVisible = false;
             }
+            if (templateReturnList) {
+                for (let i = 0; i < templateReturnList.length; i++) {
+                    if (templateReturnList[i].state === 1 && templateReturnList[i].type < 5) {
+                        if (templateReturnList[i].type === 1) {
+                            this.baseMessList.push(templateReturnList[i]);
+                        } else {
+                            this.templateReturnList.push(templateReturnList[i]);
+                        }
+                    } else {
+                        this.doctorReturnList.push(templateReturnList[i]);
+                    }
+                }
+            }
+        },
+        open(rowData) {
+            this.dialogFormVisible = true;
+            this.dataFrom = rowData;
+            this.iniData();
+        },
+        saveData() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
         }
     }
+}
 </script>
 
 <style scoped>
-    .spanLabel {
-        color: #777777;
-    }
+.spanLabel {
+    color: #777777;
+}
 
-    .spanValue {
+.spanValue {
 
-    }
+}
 
-    .listCard {
-        margin-bottom: 0.5rem;
-    }
+.listCard {
+    margin-bottom: 0.5rem;
+}
 </style>

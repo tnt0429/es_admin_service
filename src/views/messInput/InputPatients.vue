@@ -8,9 +8,9 @@
 </template>
 
 <script>
-    export default {
-        name: "InputPatients"
-    }
+export default {
+    name: "InputPatients"
+}
 </script>
 
 <style scoped>

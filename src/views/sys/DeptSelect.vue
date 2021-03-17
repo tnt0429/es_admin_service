@@ -9,33 +9,33 @@
 </template>
 
 <script>
-    import deptList from "../../api/deptList.ts";
+import deptList from "../../api/deptList.ts";
 
-    export default {
-        name: "DeptSelect",
-        data() {
-            return {
-                dialogFormVisible: false,
-                dataList: deptList,
-                defaultProps: {
-                    children: 'children',
-                    label: 'deptName'
-                }
-            }
-        },
-        methods: {
-            open() {
-                this.dialogFormVisible = true;
-            },
-            handleNodeClick(data) {
-                console.log(data);
-                this.dialogFormVisible = false;
-            },
-            winClose() {
-                this.dialogFormVisible = false;
+export default {
+    name: "DeptSelect",
+    data() {
+        return {
+            dialogFormVisible: false,
+            dataList: deptList,
+            defaultProps: {
+                children: 'children',
+                label: 'deptName'
             }
         }
+    },
+    methods: {
+        open() {
+            this.dialogFormVisible = true;
+        },
+        handleNodeClick(data) {
+            console.log(data);
+            this.dialogFormVisible = false;
+        },
+        winClose() {
+            this.dialogFormVisible = false;
+        }
     }
+}
 </script>
 
 <style scoped>

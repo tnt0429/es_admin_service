@@ -24,41 +24,41 @@
 </template>
 
 <script>
-    export default {
-        name: "PatientsCondition",
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                dataFrom: {},
-                rules: {
-                    patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
-                },
-            };
+export default {
+    name: "PatientsCondition",
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            dataFrom: {},
+            rules: {
+                patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
+            },
+        };
+    },
+    methods: {
+        open(rowData) {
+            this.dialogFormVisible = true;
+            this.dataFrom = rowData;
         },
-        methods: {
-            open(rowData) {
-                this.dialogFormVisible = true;
-                this.dataFrom = rowData;
-            },
-            saveData() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            winClose() {
-                this.dialogFormVisible = false;
-            }
+        saveData() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
         }
     }
+}
 </script>
 
 <style scoped>

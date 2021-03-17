@@ -108,41 +108,42 @@
 </template>
 
 <script>
-    import deptList from "../../api/deptList.ts";
-    export default {
-        name: "DeptList",
-        data() {
-            return {
-                fullscreenLoading: false,
-                selectData: {
-                    label: "",
-                    level: 2,
-                    province: "13",
-                    city: "1301",
-                    county: "130101",
-                    code: "abc",
-                    hospitalLevel: "1",
-                    linkMan: "",
-                    linkPhone: "",
-                    salesman: "",
-                    salesmanPhone: ""
-                },
-                dataList: deptList,
-                defaultProps: {
-                    children: 'children',
-                    label: 'deptName'
-                }
-            }
-        },
-        mounted() {
-        },
-        methods: {
-            handleNodeClick(data) {
-                this.selectData = data;
-                console.log(data);
+import deptList from "../../api/deptList.ts";
+
+export default {
+    name: "DeptList",
+    data() {
+        return {
+            fullscreenLoading: false,
+            selectData: {
+                label: "",
+                level: 2,
+                province: "13",
+                city: "1301",
+                county: "130101",
+                code: "abc",
+                hospitalLevel: "1",
+                linkMan: "",
+                linkPhone: "",
+                salesman: "",
+                salesmanPhone: ""
+            },
+            dataList: deptList,
+            defaultProps: {
+                children: 'children',
+                label: 'deptName'
             }
         }
+    },
+    mounted() {
+    },
+    methods: {
+        handleNodeClick(data) {
+            this.selectData = data;
+            console.log(data);
+        }
     }
+}
 </script>
 
 <style scoped>

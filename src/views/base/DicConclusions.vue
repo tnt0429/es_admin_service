@@ -76,45 +76,45 @@
 </template>
 
 <script>
-    import TablePage from "../../mixins/TablePage.ts";
+import TablePage from "../../mixins/TablePage.ts";
 
-    export default {
-        name: "DicConclusions",
-        components: {
-            DeptSelect: () => import("../sys/DeptSelect" )
-        },
-        mixins: [TablePage],
-        data() {
-            return {
-                formQuery: {
-                    dicName: "",
-                    dicCode: "",
-                    mnemonicCode: "",
-                    type: "",
-                    pageStart: 1,
-                    pageSize: 10
-                },
-                tableData: [],
-                total: 0,
-            }
-        },
-        mounted() {
-            this.onQuery(1);
-        },
-        methods: {
-            onQuery(first) {
-                this.fullscreenLoading = true;
-                if (first) {
-                    this.formQuery.pageStart = 1;
-                }
-                this.total = this.tableData.length;
-                this.fullscreenLoading = false;
+export default {
+    name: "DicConclusions",
+    components: {
+        DeptSelect: () => import("../sys/DeptSelect" )
+    },
+    mixins: [TablePage],
+    data() {
+        return {
+            formQuery: {
+                dicName: "",
+                dicCode: "",
+                mnemonicCode: "",
+                type: "",
+                pageStart: 1,
+                pageSize: 10
             },
-            selectDept() {
-                this.$refs.deptSelect.open();
+            tableData: [],
+            total: 0,
+        }
+    },
+    mounted() {
+        this.onQuery(1);
+    },
+    methods: {
+        onQuery(first) {
+            this.fullscreenLoading = true;
+            if (first) {
+                this.formQuery.pageStart = 1;
             }
+            this.total = this.tableData.length;
+            this.fullscreenLoading = false;
+        },
+        selectDept() {
+            this.$refs.deptSelect.open();
         }
     }
+}
 </script>
 
 <style scoped>

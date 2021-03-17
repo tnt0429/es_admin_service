@@ -10,7 +10,7 @@
             <el-form ref="#" :model="formQuery" label-width="5rem" :inline="true" size="small">
                 <el-form-item label="机构">
                     <el-input v-model="formQuery.deptId" placeholder="请选择机构" readonly>
-                        <el-button slot="append" icon="el-icon-search" @click="selectDept" />
+                        <el-button slot="append" icon="el-icon-search" @click="selectDept"/>
                     </el-input>
                 </el-form-item>
                 <el-form-item label="疾病名称" label-width="7rem">
@@ -73,51 +73,51 @@
                 </div>
             </el-card>
         </el-row>
-        <DeptSelect ref="deptSelect" />
+        <DeptSelect ref="deptSelect"/>
     </div>
 </template>
 
 <script>
-    import TablePage from "../../mixins/TablePage.ts";
-    import dicDiseaseList from "../../api/dicDiseaseList.ts"
+import TablePage from "../../mixins/TablePage.ts";
+import dicDiseaseList from "../../api/dicDiseaseList.ts"
 
-    export default {
-        name: "DicDisease",
-        components: {
-            DeptSelect: () => import("../sys/DeptSelect" )
-        },
-        mixins: [TablePage],
-        data() {
-            return {
-                formQuery: {
-                    dicName: "",
-                    dicCode: "",
-                    mnemonicCode: "",
-                    type: "",
-                    pageStart: 1,
-                    pageSize: 10
-                },
-                tableData: dicDiseaseList,
-                total: 0,
-            }
-        },
-        mounted() {
-            this.onQuery(1);
-        },
-        methods: {
-            onQuery(first) {
-                this.fullscreenLoading = true;
-                if (first) {
-                    this.formQuery.pageStart = 1;
-                }
-                this.total = this.tableData.length;
-                this.fullscreenLoading = false;
+export default {
+    name: "DicDisease",
+    components: {
+        DeptSelect: () => import("../sys/DeptSelect" )
+    },
+    mixins: [TablePage],
+    data() {
+        return {
+            formQuery: {
+                dicName: "",
+                dicCode: "",
+                mnemonicCode: "",
+                type: "",
+                pageStart: 1,
+                pageSize: 10
             },
-            selectDept(){
-                this.$refs.deptSelect.open();
+            tableData: dicDiseaseList,
+            total: 0,
+        }
+    },
+    mounted() {
+        this.onQuery(1);
+    },
+    methods: {
+        onQuery(first) {
+            this.fullscreenLoading = true;
+            if (first) {
+                this.formQuery.pageStart = 1;
             }
+            this.total = this.tableData.length;
+            this.fullscreenLoading = false;
+        },
+        selectDept() {
+            this.$refs.deptSelect.open();
         }
     }
+}
 </script>
 
 <style scoped>

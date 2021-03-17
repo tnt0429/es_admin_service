@@ -35,66 +35,66 @@
 </template>
 
 <script>
-    export default {
-        name: "DiseaseLabelEdit",
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                stateList: [{id: 1, name: "在用"}, {id: 2, name: "停用"}],
-                rules: {
-                    labelName: [{required: true, message: "请输入标签名称", trigger: 'blur'}],
-                    labelContent: [{required: true, message: "请输入标签说明", trigger: 'blur'}],
-                    state: [{required: true, message: "请选择状态", trigger: 'blur'}],
-                },
-                dataFrom: {},
-            };
-        },
-        mounted() {
-        },
-        methods: {
-            open(id) {
-                this.dialogFormVisible = true;
-                if (id) {
-                    this.fullscreenLoading = true;
-                    this.dataFrom = {
-                        labelName: "",
-                        labelContent: "",
-                        state: 1,
-                        id: 1
-                    };
-                    this.fullscreenLoading = false;
-                } else {
-                    this.dataFrom = {id: null};
-                }
+export default {
+    name: "DiseaseLabelEdit",
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            stateList: [{id: 1, name: "在用"}, {id: 2, name: "停用"}],
+            rules: {
+                labelName: [{required: true, message: "请输入标签名称", trigger: 'blur'}],
+                labelContent: [{required: true, message: "请输入标签说明", trigger: 'blur'}],
+                state: [{required: true, message: "请选择状态", trigger: 'blur'}],
             },
-            listRole() {
-            },
-            saveUser() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            winClose() {
-                this.dialogFormVisible = false;
-                this.dataFrom = {};
-                this.$refs['dataForm'].resetFields();
+            dataFrom: {},
+        };
+    },
+    mounted() {
+    },
+    methods: {
+        open(id) {
+            this.dialogFormVisible = true;
+            if (id) {
+                this.fullscreenLoading = true;
+                this.dataFrom = {
+                    labelName: "",
+                    labelContent: "",
+                    state: 1,
+                    id: 1
+                };
+                this.fullscreenLoading = false;
+            } else {
+                this.dataFrom = {id: null};
             }
+        },
+        listRole() {
+        },
+        saveUser() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
+            this.dataFrom = {};
+            this.$refs['dataForm'].resetFields();
         }
     }
+}
 </script>
 
 <style scoped lang="scss">
-    .w100 {
-        width: 100%;
-    }
+.w100 {
+    width: 100%;
+}
 
 </style>

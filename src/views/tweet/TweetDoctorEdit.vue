@@ -17,21 +17,23 @@
             <el-row>
                 <el-col :span="24">
                     <el-form-item label="推文标题" prop="tweetTitle">
-                        <el-input v-model="dataFrom.tweetTitle" placeholder="请输入推文标题" class="w100" maxlength="30" />
+                        <el-input v-model="dataFrom.tweetTitle" placeholder="请输入推文标题" class="w100" maxlength="30"/>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="24">
                     <el-form-item label="推文概述" prop="tweetSummary">
-                        <el-input v-model="dataFrom.tweetSummary" placeholder="请输入推文概述" class="w100" maxlength="100" type="textarea" :rows="2" show-word-limit/>
+                        <el-input v-model="dataFrom.tweetSummary" placeholder="请输入推文概述" class="w100" maxlength="100" type="textarea" :rows="2"
+                                  show-word-limit/>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="24">
                     <el-form-item label="推文内容" prop="tweetContent">
-                        <el-input v-model="dataFrom.tweetContent" class="w100" maxlength="4000" type="textarea" :rows="10" show-word-limit :autosize="{ minRows: 10, maxRows: 30 }"/>
+                        <el-input v-model="dataFrom.tweetContent" class="w100" maxlength="4000" type="textarea" :rows="10" show-word-limit
+                                  :autosize="{ minRows: 10, maxRows: 30 }"/>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -40,54 +42,54 @@
 </template>
 
 <script>
-    export default {
-        name: "TweetDoctorEdit",
-        props: {
-            dataId: Number
-        },
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                rules: {
-                    tweetTitle: [{required: true, message: "请输入推文标题", trigger: 'blur'}],
-                    tweetSummary: [{required: true, message: "请输入推文概述", trigger: 'blur'}],
-                    tweetContent: [{required: true, message: "请录入推文内容", trigger: 'blur'}]
-                },
-                dataFrom: {
-                    tweetTitle: '',
-                    tweetSummary: '',
-                    tweetContent: ''
-                },
-            };
-        },
-        methods: {
-            open(id) {
-                this.dialogFormVisible = true;
+export default {
+    name: "TweetDoctorEdit",
+    props: {
+        dataId: Number
+    },
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            rules: {
+                tweetTitle: [{required: true, message: "请输入推文标题", trigger: 'blur'}],
+                tweetSummary: [{required: true, message: "请输入推文概述", trigger: 'blur'}],
+                tweetContent: [{required: true, message: "请录入推文内容", trigger: 'blur'}]
             },
-            saveUser() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
+            dataFrom: {
+                tweetTitle: '',
+                tweetSummary: '',
+                tweetContent: ''
             },
-            winClose() {
-                this.dialogFormVisible = false;
-            }
+        };
+    },
+    methods: {
+        open(id) {
+            this.dialogFormVisible = true;
+        },
+        saveUser() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
         }
     }
+}
 </script>
 
 <style scoped lang="scss">
-    .w100 {
-        width: 100%;
-    }
+.w100 {
+    width: 100%;
+}
 
 </style>

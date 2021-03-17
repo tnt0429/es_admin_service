@@ -21,62 +21,62 @@
 
 <script>
 
-    export default {
-        name: "UpdPassword",
-        data() {
-            let loginPass = (rule, value, callback) => {
-                if (value.length < 5) {
-                    callback(new Error("输入的密码需大于五位"));
-                } else {
-                    callback();
-                }
-            };
-            let twoPassword = (rule, value, callback) => {
-                if (value !== this.dataFrom.newPassword) {
-                    callback(new Error('两次输入密码不一致!'));
-                } else {
-                    callback();
-                }
-            };
-            return {
-                fullscreenLoading: false,
-                dataFrom: {
-                    oldPassword: '',
-                    newPassword: '',
-                    twoPassword: ''
-                },
-                pwdType: 'password',
-                oldPwdType: 'password',
-                twoPwdType: 'password',
-                rules: {
-                    oldPassword: [
-                        {required: true, trigger: 'blur', validator: loginPass}
-                    ],
-                    newPassword: [
-                        {required: true, trigger: 'blur', validator: loginPass}
-                    ],
-                    twoPassword: [
-                        {required: true, trigger: 'blur', validator: twoPassword}
-                    ]
-                }
+export default {
+    name: "UpdPassword",
+    data() {
+        let loginPass = (rule, value, callback) => {
+            if (value.length < 5) {
+                callback(new Error("输入的密码需大于五位"));
+            } else {
+                callback();
             }
-        },
-        methods: {
-            update() {
-                this.$refs['form'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message.success("修改成功！");
-                        this.fullscreenLoading = false;
-                        this.$store.dispatch('LogOut').then(() => {
-                            location.reload() // 为了重新实例化vue-router对象 避免bug
-                        });
-                        this.fullscreenLoading = false;
-                    }
-                });
+        };
+        let twoPassword = (rule, value, callback) => {
+            if (value !== this.dataFrom.newPassword) {
+                callback(new Error('两次输入密码不一致!'));
+            } else {
+                callback();
+            }
+        };
+        return {
+            fullscreenLoading: false,
+            dataFrom: {
+                oldPassword: '',
+                newPassword: '',
+                twoPassword: ''
+            },
+            pwdType: 'password',
+            oldPwdType: 'password',
+            twoPwdType: 'password',
+            rules: {
+                oldPassword: [
+                    {required: true, trigger: 'blur', validator: loginPass}
+                ],
+                newPassword: [
+                    {required: true, trigger: 'blur', validator: loginPass}
+                ],
+                twoPassword: [
+                    {required: true, trigger: 'blur', validator: twoPassword}
+                ]
             }
         }
+    },
+    methods: {
+        update() {
+            this.$refs['form'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message.success("修改成功！");
+                    this.fullscreenLoading = false;
+                    this.$store.dispatch('LogOut').then(() => {
+                        location.reload() // 为了重新实例化vue-router对象 避免bug
+                    });
+                    this.fullscreenLoading = false;
+                }
+            });
+        }
     }
+}
 </script>
 
 <style scoped>

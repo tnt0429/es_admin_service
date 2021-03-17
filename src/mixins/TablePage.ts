@@ -3,7 +3,7 @@ export default {
         return {
             formQuery: {
                 pageStart: 1,
-                pageSize: 10
+                pageSize: 15
             },
             total: 0
         }

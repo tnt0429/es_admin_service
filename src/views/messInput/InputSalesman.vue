@@ -73,73 +73,73 @@
 </template>
 
 <script>
-    import TablePage from "../../mixins/TablePage.ts";
-    import hospitalMessList from "../../api/hospitalMessList.ts";
+import TablePage from "../../mixins/TablePage.ts";
+import hospitalMessList from "../../api/hospitalMessList.ts";
 
-    export default {
-        name: "InputSalesman",
-        components: {
-            DataEdit: () => import('./InputEdit'),
-            DeptSelect: () => import("../sys/DeptSelect" )
-        },
-        mixins: [TablePage],
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                formQuery: {
-                    patientsName: "",
-                    patientsCard: "",
-                    doctor: "",
-                    admissionDate: "",
-                    dischargeDate: "",
-                    deptId: "",
-                    pageStart: 1,
-                    pageSize: 10
-                },
-                dataId: 0,
-                tableData: hospitalMessList,
-                total: 0
-            };
-        },
-        mounted() {
-            this.onQuery(1);
-        },
-        methods: {
-            onQuery(first) {
-                this.fullscreenLoading = true;
-                if (first) {
-                    this.formQuery.pageStart = 1;
-                }
-                this.total = this.tableData.length;
-                this.fullscreenLoading = false;
+export default {
+    name: "InputSalesman",
+    components: {
+        DataEdit: () => import('./InputEdit'),
+        DeptSelect: () => import("../sys/DeptSelect" )
+    },
+    mixins: [TablePage],
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            formQuery: {
+                patientsName: "",
+                patientsCard: "",
+                doctor: "",
+                admissionDate: "",
+                dischargeDate: "",
+                deptId: "",
+                pageStart: 1,
+                pageSize: 10
             },
-            onNewData() {
-                this.$refs.dataEdit.open({});
-            },
-            handleEdit(row) {
-                this.$refs.dataEdit.open(row);
-            },
-            handleDelete(row) {
-                console.log(row);
-                this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    type: "warning"
-                }).then(() => {
-                    this.$message({
-                        type: "success",
-                        message: "删除数据成功!",
-                        center: true
-                    });
-                }).catch(() => {
-                });
-            },
-            selectDept() {
-                this.$refs.deptSelect.open();
+            dataId: 0,
+            tableData: hospitalMessList,
+            total: 0
+        };
+    },
+    mounted() {
+        this.onQuery(1);
+    },
+    methods: {
+        onQuery(first) {
+            this.fullscreenLoading = true;
+            if (first) {
+                this.formQuery.pageStart = 1;
             }
+            this.total = this.tableData.length;
+            this.fullscreenLoading = false;
+        },
+        onNewData() {
+            this.$refs.dataEdit.open({});
+        },
+        handleEdit(row) {
+            this.$refs.dataEdit.open(row);
+        },
+        handleDelete(row) {
+            console.log(row);
+            this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            }).then(() => {
+                this.$message({
+                    type: "success",
+                    message: "删除数据成功!",
+                    center: true
+                });
+            }).catch(() => {
+            });
+        },
+        selectDept() {
+            this.$refs.deptSelect.open();
         }
     }
+}
 </script>
 
 <style scoped>

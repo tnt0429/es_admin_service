@@ -51,84 +51,84 @@
 </template>
 
 <script>
-    import roleList from "../../api/roleList.ts"
+import roleList from "../../api/roleList.ts"
 
-    export default {
-        name: "UserEdit",
-        components: {
-            DeptSelect: () => import("./DeptSelect" )
-        },
-        props: {
-            dataId: Number
-        },
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                stateList: [{id: 1, name: "在用"}, {id: 2, name: "停用"}],
-                rules: {
-                    loginName: [{required: true, message: "请输入登录名", trigger: 'blur'}],
-                    userName: [{required: true, message: "请输入用户名", trigger: 'blur'}],
-                    roleId: [{required: true, message: "请选择角色", trigger: 'blur'}],
-                    deptId: [{required: true, message: "请选择机构", trigger: 'blur'}],
-                    state: [{required: true, message: "请选择状态", trigger: 'blur'}],
-                },
-                dataFrom: {},
-                roleList: roleList
-            };
-        },
-        mounted() {
-            this.listRole();
-        },
-        methods: {
-            open(id) {
-                this.dialogFormVisible = true;
-                if (id) {
-                    this.fullscreenLoading = true;
-                    this.dataFrom = {
-                        loginName: "admin",
-                        userName: "系统管理员",
-                        roleId: 1,
-                        deptId: 1,
-                        state: 1,
-                        id: 1
-                    };
-                    this.fullscreenLoading = false;
-                } else {
-                    this.dataFrom = {id: null};
-                }
+export default {
+    name: "UserEdit",
+    components: {
+        DeptSelect: () => import("./DeptSelect" )
+    },
+    props: {
+        dataId: Number
+    },
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            stateList: [{id: 1, name: "在用"}, {id: 2, name: "停用"}],
+            rules: {
+                loginName: [{required: true, message: "请输入登录名", trigger: 'blur'}],
+                userName: [{required: true, message: "请输入用户名", trigger: 'blur'}],
+                roleId: [{required: true, message: "请选择角色", trigger: 'blur'}],
+                deptId: [{required: true, message: "请选择机构", trigger: 'blur'}],
+                state: [{required: true, message: "请选择状态", trigger: 'blur'}],
             },
-            listRole() {
-            },
-            saveUser() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            selectDept() {
-                this.$refs.deptSelect.open();
-            },
-            winClose() {
-                this.dialogFormVisible = false;
-                this.dataFrom = {};
-                this.ownerIdList = [];
-                this.$refs['dataForm'].resetFields();
+            dataFrom: {},
+            roleList: roleList
+        };
+    },
+    mounted() {
+        this.listRole();
+    },
+    methods: {
+        open(id) {
+            this.dialogFormVisible = true;
+            if (id) {
+                this.fullscreenLoading = true;
+                this.dataFrom = {
+                    loginName: "admin",
+                    userName: "系统管理员",
+                    roleId: 1,
+                    deptId: 1,
+                    state: 1,
+                    id: 1
+                };
+                this.fullscreenLoading = false;
+            } else {
+                this.dataFrom = {id: null};
             }
+        },
+        listRole() {
+        },
+        saveUser() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        selectDept() {
+            this.$refs.deptSelect.open();
+        },
+        winClose() {
+            this.dialogFormVisible = false;
+            this.dataFrom = {};
+            this.ownerIdList = [];
+            this.$refs['dataForm'].resetFields();
         }
     }
+}
 </script>
 
 <style scoped lang="scss">
-    .w100 {
-        width: 100%;
-    }
+.w100 {
+    width: 100%;
+}
 
 </style>

@@ -1,20 +1,20 @@
 <template>
-  <div class="mainDiv">
-    <!--        <img src="../assets/images/main/main_img.png" alt="img" class="imgImg">-->
-  </div>
+    <div class="mainDiv">
+        <!--        <img src="../assets/images/main/main_img.png" alt="img" class="imgImg">-->
+    </div>
 </template>
 
 <script>
-  export default {
+export default {
     name: 'Dashboard',
     data() {
-      return {};
+        return {};
     }
-  };
+};
 </script>
 
 <style scoped lang="scss">
-  .mainDiv {
+.mainDiv {
     position: fixed;
     height: 100%;
     width: 100%;
@@ -23,12 +23,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .imgImg {
+.imgImg {
     width: 30rem;
     margin-top: -4rem;
     margin-left: -10rem;
-  }
+}
 
 </style>

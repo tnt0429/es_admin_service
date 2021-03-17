@@ -305,48 +305,48 @@
 </template>
 
 <script>
-    export default {
-        name: "ClinicEdit",
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                rules: {
-                    patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
-                    patientsSex: [{required: true, message: "请输入性别", trigger: 'blur'}],
-                    patientsBirthday: [{required: true, message: "请录入出生日期", trigger: 'blur'}]
-                },
-                dataFrom: {},
-            };
+export default {
+    name: "ClinicEdit",
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            rules: {
+                patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
+                patientsSex: [{required: true, message: "请输入性别", trigger: 'blur'}],
+                patientsBirthday: [{required: true, message: "请录入出生日期", trigger: 'blur'}]
+            },
+            dataFrom: {},
+        };
+    },
+    methods: {
+        open(rowData) {
+            this.dialogFormVisible = true;
+            this.dataFrom = rowData;
         },
-        methods: {
-            open(rowData) {
-                this.dialogFormVisible = true;
-                this.dataFrom = rowData;
-            },
-            saveData() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            winClose() {
-                this.dialogFormVisible = false;
-            }
+        saveData() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
         }
     }
+}
 </script>
 
 <style scoped lang="scss">
-    .w100 {
-        width: 100%;
-    }
+.w100 {
+    width: 100%;
+}
 
 </style>

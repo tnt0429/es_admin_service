@@ -7,9 +7,9 @@
 </template>
 
 <script>
-    export default {
-        name: "TweetOperation"
-    }
+export default {
+    name: "TweetOperation"
+}
 </script>
 
 <style scoped>

@@ -15,7 +15,7 @@
                 <el-col :span="10">
                     <el-form-item label="绑定医生" prop="patientsBirthday">
                         <el-table :data="tableData" style="width: 100%">
-                            <el-table-column prop="doctorName" label="医生姓名" />
+                            <el-table-column prop="doctorName" label="医生姓名"/>
                             <el-table-column prop="patientsCount" label="已绑患者数" width="100" align="right"/>
                             <el-table-column width="80" label="操作" header-align="center" align="center">
                                 <template slot-scope="scope">
@@ -41,52 +41,52 @@
 </template>
 
 <script>
-    import deptList from "../../api/deptList.ts";
+import deptList from "../../api/deptList.ts";
 
-    export default {
-        name: "BindDoctor",
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                dataList: deptList,
-                dataFrom: {},
-                rules: {
-                    patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
-                },
-                tableData: [
-                    {doctorName: "张乾", patientsCount: 18},
-                    {doctorName: "钱天天", patientsCount: 12},
-                ],
-                defaultProps: {
-                    children: 'children',
-                    label: 'deptName'
-                }
-            };
-        },
-        methods: {
-            open(rowData) {
-                this.dialogFormVisible = true;
-                this.dataFrom = rowData;
+export default {
+    name: "BindDoctor",
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            dataList: deptList,
+            dataFrom: {},
+            rules: {
+                patientsName: [{required: true, message: "请输入患者姓名", trigger: 'blur'}],
             },
-            saveData() {
-                this.$refs['dataForm'].validate(valid => {
-                    if (valid) {
-                        this.fullscreenLoading = true;
-                        this.$message({
-                            type: "success",
-                            message: "保存成功!"
-                        });
-                        this.fullscreenLoading = false;
-                        this.dialogFormVisible = false;
-                    }
-                });
-            },
-            winClose() {
-                this.dialogFormVisible = false;
+            tableData: [
+                {doctorName: "张乾", patientsCount: 18},
+                {doctorName: "钱天天", patientsCount: 12},
+            ],
+            defaultProps: {
+                children: 'children',
+                label: 'deptName'
             }
+        };
+    },
+    methods: {
+        open(rowData) {
+            this.dialogFormVisible = true;
+            this.dataFrom = rowData;
+        },
+        saveData() {
+            this.$refs['dataForm'].validate(valid => {
+                if (valid) {
+                    this.fullscreenLoading = true;
+                    this.$message({
+                        type: "success",
+                        message: "保存成功!"
+                    });
+                    this.fullscreenLoading = false;
+                    this.dialogFormVisible = false;
+                }
+            });
+        },
+        winClose() {
+            this.dialogFormVisible = false;
         }
     }
+}
 </script>
 
 <style scoped>

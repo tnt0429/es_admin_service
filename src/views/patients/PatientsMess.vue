@@ -5,12 +5,12 @@
 
 <script>
 
-    export default {
-        name: "PatientsMess",
-        components: {
-            PatientsList: () => import("./PatientsList")
-        }
+export default {
+    name: "PatientsMess",
+    components: {
+        PatientsList: () => import("./PatientsList")
     }
+}
 </script>
 
 <style scoped>

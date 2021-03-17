@@ -18,7 +18,8 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item label="门诊时间">
-                    <el-date-picker v-model="formQuery.clinicDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"/>
+                    <el-date-picker v-model="formQuery.clinicDate" type="daterange" range-separator="至" start-placeholder="开始日期"
+                                    end-placeholder="结束日期"/>
                 </el-form-item>
                 <el-form-item>
                     <el-button v-loading.fullscreen.lock="fullscreenLoading" icon="el-icon-search" type="primary" @click="onQuery(1)">
@@ -62,61 +63,62 @@
 </template>
 
 <script>
-    import TablePage from "../../mixins/TablePage.ts";
-    import accessList from "../../api/accessList.ts";
-    export default {
-        name: "AppointmentClinic",
-        components: {
-            DataEdit: () => import('./ClinicEdit'),
-            DeptSelect: () => import("../sys/DeptSelect" ),
-        },
-        mixins: [TablePage],
-        props: {
-            loadType: {
-                type: Number,
-                default: 4  //取值:1=分配主治医生;2=患者状况管理;3=回访计划管理;4=患者基础信息
+import TablePage from "../../mixins/TablePage.ts";
+import accessList from "../../api/accessList.ts";
+
+export default {
+    name: "AppointmentClinic",
+    components: {
+        DataEdit: () => import('./ClinicEdit'),
+        DeptSelect: () => import("../sys/DeptSelect" ),
+    },
+    mixins: [TablePage],
+    props: {
+        loadType: {
+            type: Number,
+            default: 4  //取值:1=分配主治医生;2=患者状况管理;3=回访计划管理;4=患者基础信息
+        }
+    },
+    data() {
+        return {
+            fullscreenLoading: false,
+            dialogFormVisible: false,
+            formQuery: {
+                patientsName: "",
+                patientsCard: "",
+                doctor: "",
+                deptId: "",
+                clinicDate: 1,
+                pageStart: 1,
+                pageSize: 10
+            },
+            tableData: accessList,
+            total: 0
+        };
+    },
+    mounted() {
+        this.onQuery(1);
+    },
+    methods: {
+        onQuery(first) {
+            this.fullscreenLoading = true;
+            if (first) {
+                this.formQuery.pageStart = 1;
             }
+            this.total = this.tableData.length;
+            this.fullscreenLoading = false;
         },
-        data() {
-            return {
-                fullscreenLoading: false,
-                dialogFormVisible: false,
-                formQuery: {
-                    patientsName: "",
-                    patientsCard: "",
-                    doctor: "",
-                    deptId: "",
-                    clinicDate: 1,
-                    pageStart: 1,
-                    pageSize: 10
-                },
-                tableData: accessList,
-                total: 0
-            };
+        onNewData() {
+            this.$refs.dataEdit.open({});
         },
-        mounted() {
-            this.onQuery(1);
+        handleEdit(row) {
+            this.$refs.dataEdit.open(row);
         },
-        methods: {
-            onQuery(first) {
-                this.fullscreenLoading = true;
-                if (first) {
-                    this.formQuery.pageStart = 1;
-                }
-                this.total = this.tableData.length;
-                this.fullscreenLoading = false;
-            },
-            onNewData() {
-                this.$refs.dataEdit.open({});
-            },
-            handleEdit(row) {
-                this.$refs.dataEdit.open(row);
-            },
-            selectDept() {
-                this.$refs.deptSelect.open();
-            }
+        selectDept() {
+            this.$refs.deptSelect.open();
         }
     }
+}
 </script>
 
 <style scoped>
