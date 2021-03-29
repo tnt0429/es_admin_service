@@ -30,7 +30,7 @@ module.exports = {
     lintOnSave: process.env.NODE_ENV === 'development',
     productionSourceMap: false,
     devServer: {
-        port: 8083,
+        port: 9000,
         host: 'localhost',
         https: false, // https:{type:Boolean}
         open: true, //配置自动启动浏览器
@@ -42,7 +42,7 @@ module.exports = {
             [process.env.VUE_APP_BASE_API]: {
                 // '/dds': {
                 ws: false, // proxy websockets
-                target: "http://localhost:8080/"
+                target: "http://localhost:8081/"
                 // changeOrigin: true,
                 // pathRewrite: {
                 //   ['^' + process.env.VUE_APP_BASE_API]: ''

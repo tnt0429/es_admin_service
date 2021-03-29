@@ -5,13 +5,14 @@
         <breadcrumb id="breadcrumb-container" class="breadcrumb-container"/>
 
         <div class="right-menu">
-            <template v-if="device!=='mobile'">
-            </template>
+            <template v-if="device!=='mobile'"/>
 
             <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
                 <div class="avatar-wrapper">
                     <el-tooltip :content="name" effect="dark" placement="bottom">
-                        <el-button size="small" type="primary" plain circle>{{ getFirstName }}</el-button>
+                        <el-button size="small" type="primary" plain circle>
+                            {{ getFirstName }}
+                        </el-button>
                     </el-tooltip>
                     <i class="el-icon-caret-bottom"/>
                 </div>

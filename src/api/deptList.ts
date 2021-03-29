@@ -25,6 +25,9 @@ export default [
         }, {
             deptName: '妇科',
             level: 3,
+        }, {
+            deptName: '儿科',
+            level: 3,
         }]
     }
 ]
